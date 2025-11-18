@@ -38,12 +38,7 @@ const person1 = new Person("John Doe", 30);
 
 const person2 = new Person("Alice", 25);
 
-interface Item {
-  title: string;
-  rating: number;
-}
-
-const filterByRating = <T extends { rating: number }>(items: T[]) => {
+const filterByRating = (items: { title: string; rating: number }[]) => {
   return items.filter((item) => item.rating >= 4);
 };
 
