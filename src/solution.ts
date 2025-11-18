@@ -1,4 +1,5 @@
-const formateValue = <T>(value: T): string | number | boolean => {
+type ValueType = string | number | boolean;
+const formatValue = (value: ValueType): string | number | boolean => {
   if (typeof value === "string") {
     return value.toUpperCase();
   }
@@ -8,10 +9,10 @@ const formateValue = <T>(value: T): string | number | boolean => {
   if (typeof value === "boolean") {
     return !value;
   }
-  throw new Error("unsupported type ");
+  return value;
 };
 
-const getLength = (value: string | any[]): number => {
+const getLength = (value: string | unknown[]): number => {
   if (typeof value === "string") {
     return value.length;
   }
@@ -29,16 +30,16 @@ class Person {
     this.age = age;
   }
 
-  getDetails() {
+  getDetails(): string {
     return `'Name: ${this.name}, Age: ${this.age}'`;
   }
 }
-
 const person1 = new Person("John Doe", 30);
-
 const person2 = new Person("Alice", 25);
 
-const filterByRating = (items: { title: string; rating: number }[]) => {
+const filterByRating = (
+  items: { title: string; rating: number }[]
+): { title: string; rating: number }[] => {
   return items.filter((item) => item.rating >= 4);
 };
 
@@ -49,12 +50,12 @@ const books = [
 ];
 
 const filterActiveUsers = (
-  users: { id: number; name: string; email: string; isActive: boolean }[]
-) => {
-  return users.filter((user) => user.isActive);
+  Users: { id: number; name: string; email: string; isActive: boolean }[]
+): { id: number; name: string; email: string; isActive: boolean }[] => {
+  return Users.filter((user) => user.isActive);
 };
 
-const users1 = [
+const users = [
   { id: 1, name: "Rakib", email: "rakib@example.com", isActive: true },
   { id: 2, name: "Asha", email: "asha@example.com", isActive: false },
   { id: 3, name: "Rumi", email: "rumi@example.com", isActive: true },
@@ -67,11 +68,9 @@ interface Book {
   isAvailable: boolean;
 }
 
-const printBookDetails = (book: Book): void => {
-  const availableBook = book.isAvailable ? "yes" : "no";
-  console.log(
-    `Title: ${book.title}, Author: ${book.author}, Published: ${book.publishedYear}, Available: ${availableBook}`
-  );
+const printBookDetails = (book: Book): string => {
+  const availableBook = book.isAvailable ? "Yes" : "No";
+  return `Title: ${book.title}, Author: ${book.author}, Published: ${book.publishedYear}, Available: ${availableBook}`;
 };
 
 const myBook: Book = {
@@ -81,10 +80,11 @@ const myBook: Book = {
   isAvailable: true,
 };
 
-printBookDetails(myBook);
-
-const getUniqueValues = (array1: number[], array2: number[]): number[] => {
-  const result: number[] = [];
+const getUniqueValues = (
+  array1: (string | number)[],
+  array2: (string | number)[]
+): (string | number)[] => {
+  const result: (string | number)[] = [];
 
   for (let i = 0; i < array1.length; i++) {
     let exists = false;
