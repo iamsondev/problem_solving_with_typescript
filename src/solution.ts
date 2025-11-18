@@ -60,4 +60,25 @@ const users1 = [
   { id: 3, name: "Rumi", email: "rumi@example.com", isActive: true },
 ];
 
-console.log(filterActiveUsers(users1));
+interface Book {
+  title: string;
+  author: string;
+  publishedYear: number;
+  isAvailable: boolean;
+}
+
+const printBookDetails = (book: Book): void => {
+  const availableBook = book.isAvailable ? "yes" : "no";
+  console.log(
+    `Title: ${book.title}, Author: ${book.author}, Published: ${book.publishedYear}, Available: ${availableBook}`
+  );
+};
+
+const myBook: Book = {
+  title: "The Great Gatsby",
+  author: "F. Scott Fitzgerald",
+  publishedYear: 1925,
+  isAvailable: true,
+};
+
+printBookDetails(myBook);
